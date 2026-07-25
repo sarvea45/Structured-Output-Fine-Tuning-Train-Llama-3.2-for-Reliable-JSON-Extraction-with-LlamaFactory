@@ -1,0 +1,21 @@
+filename,raw_output_first_50_chars,is_valid_json,has_all_required_keys,key_accuracy,value_accuracy,notes
+held_out_01.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_02.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_03.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_04.txt,"{""vendor"": ""Global Logistics LLC"", ""invoice_number",True,False,0.9,1.0,Hallucinated extra key 'tax_rate' because dataset didn't have enough JPY invoices with explicit tax lines to suppress it.
+held_out_05.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_06.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_07.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_08.txt,"{""vendor"": ""Unknown"", ""invoice_number"": null, ""dat",True,True,1.0,0.5,Hallucinated 'Unknown' for vendor instead of null because training set didn't have missing vendors.
+held_out_09.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_10.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
+held_out_11.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Acme ",True,True,1.0,0.8,Output total as string instead of float. Dataset lacked sufficient GBP examples to enforce float consistency.
+held_out_12.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
+held_out_13.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
+held_out_14.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
+held_out_15.txt,"{""buyer"": ""BlueSky Retail"", ""supplier"": ""Nexus Tec",True,True,1.0,0.9,Failed to output null for delivery_date; output 'ASAP' which breaks YYYY-MM-DD schema.
+held_out_16.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
+held_out_17.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
+held_out_18.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
+held_out_19.txt,"{   ""buyer"": ""Omega"",   ""supplier"": ""Veritas"",   """,True,True,1.0,0.7,quantity field output as string '10 boxes' instead of float/int. Dataset didn't have UOM text in quantity column.
+held_out_20.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction

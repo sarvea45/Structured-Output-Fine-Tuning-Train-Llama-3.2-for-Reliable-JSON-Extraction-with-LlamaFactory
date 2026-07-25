@@ -1,0 +1,21 @@
+# Ignore model weights and adapters
+*.bin
+*.pt
+*.pth
+*.safetensors
+adapter_config.json
+adapter_model.safetensors
+runs/
+checkpoint-*/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# System
+.DS_Store
+Thumbs.db
