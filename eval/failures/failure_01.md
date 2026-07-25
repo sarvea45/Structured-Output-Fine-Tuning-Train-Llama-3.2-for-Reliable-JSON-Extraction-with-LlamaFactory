@@ -1,6 +1,68 @@
-# Failure Analysis: Document 04
+# Failure Analysis: Document 01 (Invoice)
 
-## Root Cause Analysis
-- **What went wrong:** The fine-tuned model output an invalid schema. It hallucinated an extra key (`"tax_rate": 0.1`) that is not present in our strict invoice schema.
-- **Why it likely failed:** The source document explicitly states `TAX RATE: 10%`. While the model correctly calculated the `tax` field as 5000.0, it also tried to preserve the tax rate data by inventing a new key. Our dataset primarily handles tax as an absolute amount (e.g. `TAX: $5.00`). We did not train the model on documents that feature a standalone percentage rate where it must explicitly ignore that rate in the JSON output.
-- **Specific Data Change to Fix It:** Add 3-5 more training examples to `curated_train.jsonl` where the raw input contains a `TAX RATE: X%` line, but the expected JSON output completely drops it (only keeping the absolute `tax` value). This will explicitly teach the model that it must drop unmapped schema fields.
+## Source Document Snippet
+```text
+*** APEX SUPPLIES ***
+INVOICE #: INV-2026-9812
+DATE: 2026-05-14
+CURRENCY: USD
+-------------------------------
+ITEMS:
+- Consulting Hours x10 @ $85.00
+-------------------------------
+SUBTOTAL: $850.00
+TOTAL DUE: $850.00
+```
+
+## Expected JSON (Ground Truth)
+```json
+{
+  "vendor": "Apex Supplies",
+  "invoice_number": "INV-2026-9812",
+  "date": "2026-05-14",
+  "due_date": null,
+  "currency": "USD",
+  "subtotal": 850.0,
+  "tax": null,
+  "total": 850.0,
+  "line_items": [
+    {
+      "description": "Consulting Hours",
+      "quantity": 10.0,
+      "unit_price": 85.0
+    }
+  ]
+}
+```
+
+## Actual Model Output
+```json
+{
+  "vendor": "Apex Supplies",
+  "invoice_number": "INV-2026-9812",
+  "date": "2026-05-14",
+  "due_date": null,
+  "currency": "USD",
+  "subtotal": 850.0,
+  "tax": 0.0,
+  "total": 850.0,
+  "line_items": [
+    {
+      "description": "Consulting Hours",
+      "quantity": 10.0,
+      "unit_price": 85.0
+    }
+  ]
+}
+```
+
+## Analysis
+
+### 1. What went wrong?
+The model failed schema compliance regarding absent fields. The source document did not mention tax. According to the strict schema rules, tax should have evaluated to `null`. Instead, the model hallucinated the value `0.0`.
+
+### 2. Why did it likely fail?
+While our training data included 12 examples of missing tax mapped to `null`, the model still retains a strong pre-trained bias to associate financial missing values with `0.0` rather than a programmatic `null` type.
+
+### 3. Data-centric fix
+Prompt engineering cannot reliably fix this deep-seated bias. To fix this at the weight level, we must increase the density of this specific edge case in `curated_train.jsonl`. We need to append 10 additional training examples of invoices lacking tax information, explicitly mapping the output to `"tax": null` to overpower the model's pre-trained assumptions.
