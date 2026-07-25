@@ -1,30 +1,33 @@
-# Structured Output Fine-Tuning with Llama 3.2
+# Structured Output Fine-Tuning (Llama 3.2)
 
-This repository contains the complete MLOps pipeline for fine-tuning the open-weights Llama 3.2 model to act as a highly reliable, deterministic JSON extraction engine for business documents (Invoices and Purchase Orders).
+## Project Overview
+This repository contains the complete data engineering, fine-tuning configuration, and evaluation pipeline for training a Llama 3.2 (3B) model to reliably extract strict JSON payloads from unstructured business documents (Invoices and Purchase Orders).
 
-## Project Objective
+The goal of this project was to transition a general-purpose LLM into a deterministic data extraction engine using **Parameter-Efficient Fine-Tuning (LoRA)** via the **LlamaFactory** framework.
 
-General-purpose LLMs struggle with format consistency, frequently breaking downstream automated pipelines by wrapping JSON in Markdown, hallucinating keys, or injecting conversational text. This project solves that reliability problem via Supervised Fine-Tuning (SFT).
+## Methodology & Findings
 
-By fine-tuning Llama 3.2 on a carefully curated dataset, the model's native behavior is altered to output strict, machine-parseable JSON that perfectly adheres to a pre-defined schema, maximizing the Parse Success Rate.
+### 1. Schema Design
+Strict JSON schemas were defined for both Invoices and Purchase Orders (`schema/`). Crucially, we enforced rigorous null-handling rules: absent optional fields must output a discrete `null` rather than omitting the key or utilizing empty strings.
 
-## Methodology
+### 2. Data Curation
+We curated 80 highly diverse training examples (`data/curated_train.jsonl`) mimicking OCR output. The curation prioritized format diversity and explicitly targeted edge cases (missing fields, foreign currencies, multi-item arrays) to prevent model overfitting and hallucination. An audit trail of curation decisions is available in `data/curation_log.md`.
 
-- **Schema Design (`schema/`):** Defined rigid JSON schemas for Invoices and POs, establishing strict typing and rules for handling missing data (using `null`).
-- **Data Curation (`data/`):** Synthesized 80 high-variance JSONL training examples featuring complex edge cases (missing fields, nested arrays, foreign currencies).
-- **Baseline Evaluation (`eval/`):** Established the base model's Parse Success Rate using programmatic Python validation (`json.loads()`).
-- **LoRA Fine-Tuning:** Utilized LlamaFactory to inject small, trainable adapter matrices (Rank 16, Alpha 32), modifying the model weights without catastrophic forgetting.
-- **Ablation & Analysis (`eval/failures/`, `report.md`):** Measured the exact ROI of fine-tuning versus advanced prompt engineering.
+### 3. Fine-Tuning Configuration
+The model was fine-tuned using LoRA. Hyperparameters were strictly justified to avoid catastrophic forgetting and overfitting given the small dataset size (Rank 16, Alpha 32, 3 Epochs, LR 2e-4). The loss curve successfully plateaued around 0.3 without dropping to zero, indicating successful generalization.
+
+### 4. Evaluation & Failure Analysis
+The model was evaluated against a held-out set of 20 documents before and after fine-tuning. 
+- **Baseline Parse Success Rate:** 0% (Failed consistently due to markdown fences and conversational preambles).
+- **Post-Tuning Parse Success Rate:** 75% (Massive improvement in strict schema adherence, completely eliminating markdown fences).
+
+A deep dive into the remaining failure cases (`eval/failures/`) proved that all post-tuning errors were rooted in data representation issues (e.g., missing UOM string examples in the training set), validating the axiom that fine-tuning is fundamentally a data engineering problem.
 
 ## Repository Structure
-
-- `schema/`: The binding JSON schemas used for training and evaluation.
-- `data/`: The 80-example JSONL training set and manual review audit log.
-- `eval/`: Baseline and post-tuning scoring matrices, plus root-cause failure analysis.
-- `prompts/`: Documentation of the prompt engineering ablation study.
-- `training_config.md`: Theoretical justification for LoRA hyperparameters.
-- `report.md`: Final analytical comparison of Prompting vs. Fine-Tuning.
-
-## Execution Requirements
-
-This project was orchestrated entirely via the LlamaFactory Gradio Web UI. No custom PyTorch training scripts were utilized, ensuring the engineering focus remained entirely on data quality, schema enforcement, and rigorous evaluation.
+- `schema/`: JSON constraint documentation.
+- `data/`: Curated JSONL dataset and audit logs.
+- `eval/`: Baseline and post-tuning scoring matrices, responses, and root-cause failure analysis.
+- `prompts/`: A comparative study on Prompt Engineering iterations to fix the base model.
+- `screenshots/`: LlamaFactory configuration UI and training loss curves.
+- `training_config.md`: LoRA hyperparameter justifications.
+- `report.md`: Final analytical report on when to use Prompting vs. Fine-Tuning.
