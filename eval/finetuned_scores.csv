@@ -1,21 +1,21 @@
 filename,raw_output_first_50_chars,is_valid_json,has_all_required_keys,key_accuracy,value_accuracy,notes
-held_out_01.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_02.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_03.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_04.txt,"{""vendor"": ""Global Logistics LLC"", ""invoice_number",True,False,0.9,1.0,Hallucinated extra key 'tax_rate' because dataset didn't have enough JPY invoices with explicit tax lines to suppress it.
-held_out_05.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_06.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_07.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_08.txt,"{""vendor"": ""Unknown"", ""invoice_number"": null, ""dat",True,True,1.0,0.5,Hallucinated 'Unknown' for vendor instead of null because training set didn't have missing vendors.
-held_out_09.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_10.txt,"{""vendor"": ""Acme Corp"", ""invoice_number"": ""INV-111",True,True,1.0,1.0,Perfect extraction
-held_out_11.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Acme ",True,True,1.0,0.8,Output total as string instead of float. Dataset lacked sufficient GBP examples to enforce float consistency.
-held_out_12.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
-held_out_13.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
-held_out_14.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
-held_out_15.txt,"{""buyer"": ""BlueSky Retail"", ""supplier"": ""Nexus Tec",True,True,1.0,0.9,Failed to output null for delivery_date; output 'ASAP' which breaks YYYY-MM-DD schema.
-held_out_16.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
-held_out_17.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
-held_out_18.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
-held_out_19.txt,"{   ""buyer"": ""Omega"",   ""supplier"": ""Veritas"",   """,True,True,1.0,0.7,quantity field output as string '10 boxes' instead of float/int. Dataset didn't have UOM text in quantity column.
-held_out_20.txt,"{""buyer"": ""Aditya Enterprises"", ""supplier"": ""Nexus",True,True,1.0,1.0,Perfect extraction
+held_out_01.txt,"{""vendor"": ""Global Tech"", ""date"": ""2026-08-01"", ""d",True,False,0.7777777777777778,0.7777777777777778,Missing required keys or hallucinated wrong keys
+held_out_02.txt,"{""vendor"": ""PaperCo."", ""invoice_number"": ""PC-12"", ",True,False,0.5555555555555556,0.3333333333333333,Missing required keys or hallucinated wrong keys
+held_out_03.txt,"{""vendor"": ""Delta Services"", ""date"": ""2026-09-10"",",True,False,0.3333333333333333,0.2222222222222222,Missing required keys or hallucinated wrong keys
+held_out_04.txt,"{""vendor"": ""Office Depot"", ""date"": ""2026-01-05"", """,True,False,0.7777777777777778,0.6666666666666666,Missing required keys or hallucinated wrong keys
+held_out_05.txt,"{""vendor"": ""Acme Corp"", ""date"": ""2026-12-12"", ""num",True,False,0.6666666666666666,0.6666666666666666,Missing required keys or hallucinated wrong keys
+held_out_06.txt,"{""vendor"": ""SaaS Inc."", ""invoice_number"": ""88-A"", ",True,False,0.6666666666666666,0.4444444444444444,Missing required keys or hallucinated wrong keys
+held_out_07.txt,"{""vendor"": ""Local Plumber"", ""date"": ""2026-05-05"", ",True,False,0.6666666666666666,0.5555555555555556,Missing required keys or hallucinated wrong keys
+held_out_08.txt,"{""vendor"": ""FastDelivery"", ""invoice_number"": 1002.",True,False,0.7777777777777778,0.6666666666666666,Missing required keys or hallucinated wrong keys
+held_out_09.txt,"{""vendor"": ""Amazon"", ""invoice_number"": ""AWS-99"", """,True,False,0.8888888888888888,0.6666666666666666,Missing required keys or hallucinated wrong keys
+held_out_10.txt,"{""vendor"": ""IT Support Bros."", ""invoice_number"": """,True,False,0.5555555555555556,0.3333333333333333,Missing required keys or hallucinated wrong keys
+held_out_11.txt,"{""po_number"": ""PO-1001"", ""buyer"": ""TechCorp"", ""sup",True,False,0.75,0.625,Missing required keys or hallucinated wrong keys
+held_out_12.txt,"{""buyer"": ""Startup Inc."", ""supplier"": ""WeWork"", ""p",True,False,0.625,0.5,Missing required keys or hallucinated wrong keys
+held_out_13.txt,"{""vendor"": ""BigRetail"", ""po_number"": ""555"", ""date""",True,False,0.5,0.5,Missing required keys or hallucinated wrong keys
+held_out_14.txt,"{""buyer"": ""Hospital"", ""supplier"": ""MedSupply"", ""da",True,False,0.375,0.375,Missing required keys or hallucinated wrong keys
+held_out_15.txt,"{""buyer"": ""Uni."", ""supplier"": ""BookStore"", ""date"":",True,False,0.625,0.5,Missing required keys or hallucinated wrong keys
+held_out_16.txt,"{""buyer"": ""AutoShop"", ""supplier"": ""TiresRUs"", ""dat",True,False,0.625,0.5,Missing required keys or hallucinated wrong keys
+held_out_17.txt,"{""buyer"": ""GovDept"", ""supplier"": ""Cleaners"", ""po_n",True,False,0.5,0.5,Missing required keys or hallucinated wrong keys
+held_out_18.txt,"{""buyer"": ""Cafe"", ""supplier"": ""Coffee Beans Inc."",",True,False,0.625,0.375,Missing required keys or hallucinated wrong keys
+held_out_19.txt,"{""buyer"": ""Movie Studio"", ""supplier"": ""Camera Rent",True,False,0.625,0.5,Missing required keys or hallucinated wrong keys
+held_out_20.txt,"{""buyer"": ""Gym"", ""supplier"": ""WeightsCo"", ""po_numb",True,False,0.875,0.625,Missing required keys or hallucinated wrong keys

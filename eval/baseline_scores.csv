@@ -1,21 +1,21 @@
 filename,raw_output_first_50_chars,is_valid_json,has_all_required_keys,key_accuracy,value_accuracy,notes
-held_out_01.txt,"Here is the extracted data: ```json {   ""vendor"": ",False,False,0.0,0.0,Markdown fences broke parser
-held_out_02.txt,"{""vendor_name"": ""Acme"", ""tax_amount"": 10.0, ""total",True,False,0.1,0.8,Hallucinated schema keys (vendor_name instead of vendor)
-held_out_03.txt,"{   ""vendor"": ""Acme"",   ""total"": 100.0, }",False,False,0.0,0.0,Trailing comma broke JSON parser
-held_out_04.txt,"{""vendor"": ""Acme"", ""total"": 100.0}",True,False,0.3,1.0,Valid JSON but missed most required keys
-held_out_05.txt,"Here is the extracted data: ```json {   ""vendor"": ",False,False,0.0,0.0,Markdown fences broke parser
-held_out_06.txt,"{""vendor_name"": ""Acme"", ""tax_amount"": 10.0, ""total",True,False,0.1,0.8,Hallucinated schema keys (vendor_name instead of vendor)
-held_out_07.txt,"{   ""vendor"": ""Acme"",   ""total"": 100.0, }",False,False,0.0,0.0,Trailing comma broke JSON parser
-held_out_08.txt,"{""vendor"": ""Acme"", ""total"": 100.0}",True,False,0.3,1.0,Valid JSON but missed most required keys
-held_out_09.txt,"Here is the extracted data: ```json {   ""vendor"": ",False,False,0.0,0.0,Markdown fences broke parser
-held_out_10.txt,"{""vendor_name"": ""Acme"", ""tax_amount"": 10.0, ""total",True,False,0.1,0.8,Hallucinated schema keys (vendor_name instead of vendor)
-held_out_11.txt,"{   ""vendor"": ""Acme"",   ""total"": 100.0, }",False,False,0.0,0.0,Trailing comma broke JSON parser
-held_out_12.txt,"{""buyer"": ""Acme"", ""total"": 100.0}",True,False,0.3,1.0,Valid JSON but missed most required keys
-held_out_13.txt,"Here is the extracted data: ```json {   ""vendor"": ",False,False,0.0,0.0,Markdown fences broke parser
-held_out_14.txt,"{""vendor_name"": ""Acme"", ""tax_amount"": 10.0, ""total",True,False,0.1,0.8,Hallucinated schema keys (vendor_name instead of vendor)
-held_out_15.txt,"{   ""vendor"": ""Acme"",   ""total"": 100.0, }",False,False,0.0,0.0,Trailing comma broke JSON parser
-held_out_16.txt,"{""buyer"": ""Acme"", ""total"": 100.0}",True,False,0.3,1.0,Valid JSON but missed most required keys
-held_out_17.txt,"Here is the extracted data: ```json {   ""vendor"": ",False,False,0.0,0.0,Markdown fences broke parser
-held_out_18.txt,"{""vendor_name"": ""Acme"", ""tax_amount"": 10.0, ""total",True,False,0.1,0.8,Hallucinated schema keys (vendor_name instead of vendor)
-held_out_19.txt,"{   ""vendor"": ""Acme"",   ""total"": 100.0, }",False,False,0.0,0.0,Trailing comma broke JSON parser
-held_out_20.txt,"{""buyer"": ""Acme"", ""total"": 100.0}",True,False,0.3,1.0,Valid JSON but missed most required keys
+held_out_01.txt,The invoice is a JSON object with the following st,False,False,0.0,0.0,Markdown fences broke parser
+held_out_02.txt,The invoice is a JSON object with the following st,False,False,0.0,0.0,Markdown fences broke parser
+held_out_03.txt,Extract the data into a strict JSON object adherin,False,False,0.0,0.0,Markdown fences broke parser
+held_out_04.txt,"The invoice is in the following format: ``` {   ""i",False,False,0.0,0.0,Markdown fences broke parser
+held_out_05.txt,The invoice is a JSON object with the following st,False,False,0.0,0.0,Markdown fences broke parser
+held_out_06.txt,The invoice is a JSON object with the following st,False,False,0.0,0.0,Markdown fences broke parser
+held_out_07.txt,The invoice is a JSON object that adheres to the I,False,False,0.0,0.0,Conversational preamble broke parser
+held_out_08.txt,The invoice is a JSON object adhering to the Invoi,False,False,0.0,0.0,Conversational preamble broke parser
+held_out_09.txt,The invoice is a JSON object with the following st,False,False,0.0,0.0,Markdown fences broke parser
+held_out_10.txt,The invoice is a JSON object with the following st,False,False,0.0,0.0,Markdown fences broke parser
+held_out_11.txt,The output should be a JSON object with the follow,False,False,0.0,0.0,Conversational preamble broke parser
+held_out_12.txt,The data is in the following format: ``` [   {    ,False,False,0.0,0.0,Markdown fences broke parser
+held_out_13.txt,"The data is in the following format: ``` {   ""purc",False,False,0.0,0.0,Markdown fences broke parser
+held_out_14.txt,The JSON object is returned as a string. The strin,False,False,0.0,0.0,Conversational preamble broke parser
+held_out_15.txt,The data is in the following format: ``` Order 888,False,False,0.0,0.0,Markdown fences broke parser
+held_out_16.txt,The following is the JSON object that is returned:,False,False,0.0,0.0,Conversational preamble broke parser
+held_out_17.txt,# 1.0.0  ## 1.0.0  ### 1.0.0  ### 1.0.0  ### 1.0.0,False,False,0.0,0.0,Conversational preamble broke parser
+held_out_18.txt,"The following is the JSON output: ``` {     ""order",False,False,0.0,0.0,Markdown fences broke parser
+held_out_19.txt,The following is a sample of the output of the abo,False,False,0.0,0.0,Markdown fences broke parser
+held_out_20.txt,The JSON object is returned as a string. The strin,False,False,0.0,0.0,Conversational preamble broke parser
